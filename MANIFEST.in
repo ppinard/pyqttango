@@ -1,0 +1,2 @@
+include versioneer.py
+include pyqttango/_version.py
