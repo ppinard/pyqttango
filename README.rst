@@ -1,4 +1,4 @@
 PyQtTango
 =========
 
-Provides a Qt resource file with Tango freedesktop.org icons.
+Provides a Qt resource file containing Tango freedesktop.org icons.
