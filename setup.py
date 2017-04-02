@@ -46,7 +46,7 @@ class generate_rcc(Command):
                   'titles': page_title,
                   'prop': 'images',
                   'format': 'json',
-                  'imlimit': 10}
+                  'imlimit': 100}
         response = requests.get(self.URL_API, params=params).json()
         image_titles = parse_response(response)
 
