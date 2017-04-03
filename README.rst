@@ -27,6 +27,7 @@ For example::
     from PyQt5 import QtGui
 
     app = QtGui.QGuiApplication(sys.argv) # Only necessary if an application is not already created
+    QtGui.QIcon.setThemeName('tango')
     icon = QtGui.QIcon.fromTheme('accessories-calculator')
     
 For the possible icon names, please refer to the freedesktop.org 
