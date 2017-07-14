@@ -4,8 +4,6 @@ PyQtTango
 
 .. image:: https://badge.fury.io/py/pyqttango.svg
    :target: http://badge.fury.io/py/pyqttango
-.. image:: https://www.versioneye.com/user/projects/5933030022f278006540a1f8/badge.svg?style=flat-square
-   :target: https://www.versioneye.com/user/projects/5933030022f278006540a1f8
 
 Provides a Qt resource file containing Tango freedesktop.org icons.
 
