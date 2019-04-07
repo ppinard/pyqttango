@@ -8,6 +8,7 @@ from distutils.cmd import Command
 # Third party modules.
 from setuptools import setup, find_packages
 import setuptools.command.build_py as _build_py
+import tqdm
 
 # Local modules.
 import versioneer
@@ -88,7 +89,7 @@ class generate_rcc(Command):
 
         image_filepaths = []
 
-        for image_title in image_titles:
+        for image_title in tqdm.tqdm(image_titles, desc='download images'):
             url = self.query_wikimedia_image_url(image_title)
             filepath = self.download_wikimedia_image(url, outdir)
             image_filepaths.append(filepath)
@@ -96,7 +97,7 @@ class generate_rcc(Command):
         return image_filepaths
 
     def create_png(self, filepath, sizes):
-        from PyQt5 import QtGui
+        from qtpy import QtGui
 
         icon = QtGui.QIcon(filepath)
 
@@ -112,11 +113,11 @@ class generate_rcc(Command):
             pixmap.save(pngfilepath)
 
     def resize(self, image_filepaths, sizes):
-        from PyQt5 import QtGui
+        from qtpy import QtGui
 
         app = QtGui.QGuiApplication([])
 
-        for image_filepath in image_filepaths:
+        for image_filepath in tqdm.tqdm(image_filepaths, desc='resize images'):
             self.create_png(image_filepath, sizes)
 
         app.quit()
@@ -179,22 +180,22 @@ class generate_rcc(Command):
 
         outdir = os.path.join(tempfile.gettempdir(), 'pyqttango')
 
-        log.info('Download images from WikiMedia')
+        log.info('download images from WikiMedia')
         image_filepaths = self.download_wikimedia_images('Tango_icons', outdir)
 
-        log.info('Resize images')
+        log.info('resize images')
         self.resize(image_filepaths, self.IMAGE_SIZES)
 
-        log.info('Create theme')
+        log.info('create theme')
         self.create_theme(outdir, self.IMAGE_SIZES)
 
-        log.info('Create qrc')
+        log.info('create qrc')
         self.create_qrc(outdir, self.IMAGE_SIZES)
 
-        log.info('Create rcc')
+        log.info('create rcc')
         self.create_rcc(outdir)
 
-        log.info('Copy to build directory')
+        log.info('copy to build directory')
         src = os.path.join(outdir, 'tango.rcc')
         dst = os.path.join(self.build_lib, 'pyqttango')
         dir_util.mkpath(dst)
@@ -212,8 +213,8 @@ with open(os.path.join(BASEDIR, 'README.rst'), 'r') as fp:
 PACKAGES = find_packages()
 PACKAGE_DATA = {}
 
-INSTALL_REQUIRES = ['PyQt5']
-EXTRAS_REQUIRE = {'develop': ['nose', 'coverage', 'requests', 'requests_download']}
+INSTALL_REQUIRES = ['qtpy']
+EXTRAS_REQUIRE = {'develop': ['nose', 'coverage', 'requests', 'requests_download', 'tqdm']}
 
 CMDCLASS = versioneer.get_cmdclass()
 CMDCLASS['build_py'] = build_py

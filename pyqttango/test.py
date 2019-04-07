@@ -6,7 +6,7 @@ import unittest
 import logging
 
 # Third party modules.
-from PyQt5 import QtGui
+from qtpy import QtGui
 
 # Local modules.
 import pyqttango #@UnusedImport
