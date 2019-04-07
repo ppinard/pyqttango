@@ -54,7 +54,7 @@ If you want to manually create it, run::
     python3 setup.py generate_rcc
 
 License
--------
+=======
 
 As for 0.2.0, license under Apache Software License 2.0
 
